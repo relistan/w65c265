@@ -20,6 +20,9 @@
 .define PD0		0xdf00
 .define PD7		0xdf23
 
+; Port 7 Chip Select
+.define PCS7	0xdf27
+
 start:
   ; Disable interrupts to protect from ROM routines running
   sei
@@ -35,14 +38,14 @@ start:
   rep #0x10
 
 main:
-  ;; Port7 doesn't have a data direction register since it's
-  ;; always output (chip select). But we have to put it under
-  ;; manual control to use it for LED blinking.
+  ;; Port7 doesn't have a data direction register since it's always 
+  ;; output (chip select). But we have to put it under manual control
+  ;; to use it for LED blinking.
   lda.b #0x00
-  sta 0xdf27 ;; PCS to output for Port 7
+  sta PCS7 ;; PCS to manual output for Port 7
 
-  ;; To use Pins as I/O instead of address and data bus. The board
-  ;; initializes with them as address pins. The control reigster
+  ;; To use pins as I/O instead of address and data bus. The board
+  ;; initializes with them as address pins. The control register
   ;; allows us to take manual control.
   lda.b #0x00
   sta BCR0
