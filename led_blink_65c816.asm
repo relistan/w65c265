@@ -37,7 +37,6 @@ start:
   ; Set X/Y to 16-bit
   rep #0x10
 
-main:
   ;; Port7 doesn't have a data direction register since it's always 
   ;; output (chip select). But we have to put it under manual control
   ;; to use it for LED blinking.
