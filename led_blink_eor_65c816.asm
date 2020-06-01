@@ -62,9 +62,7 @@ blink:
   sta PD7
   sta PD0
  
-  pha.b			;; Push A onto the stack
   jsr delay
-  pla.b			;; Pop A from the stack
   jmp blink
 
 delay:
